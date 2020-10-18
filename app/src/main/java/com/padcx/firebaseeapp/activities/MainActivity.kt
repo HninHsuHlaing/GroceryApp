@@ -24,6 +24,7 @@ import com.padc.grocery.mvp.presenters.MainPresenter
 import com.padc.grocery.mvp.presenters.impls.MainPresenterImpl
 import com.padc.grocery.mvp.views.MainView
 import com.padcx.firebaseeapp.R
+import com.padcx.firebaseeapp.adapters.GroceryGridAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity(), MainView {
 
     private var mGroceryDialogFragment: GroceryDialogFragment? = null
     private lateinit var mAdapter: GroceryAdapter
+    private lateinit var mAdapterGrid : GroceryGridAdapter
     private lateinit var mPresenter: MainPresenter
 
     companion object {
@@ -97,8 +99,8 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun setUpRecyclerView() {
-        mAdapter = GroceryAdapter(mPresenter)
-        rvGroceries.adapter = mAdapter
+//        mAdapter = GroceryAdapter(mPresenter)
+//        rvGroceries.adapter = mAdapter
 
 //        rvGroceries.layoutManager = GridLayoutManager(this,2)
 //        rvGroceries.layoutManager =
@@ -121,6 +123,11 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun showGroceryData(groceryList: List<GroceryVO>) {
         mAdapter.setNewData(groceryList)
+      //  mAdapterGrid.setNewData(groceryList)
+    }
+
+    override fun showGroceryDataGrid(groceryList: List<GroceryVO>) {
+        mAdapterGrid.setNewData(groceryList)
     }
 
     override fun showGroceryDialog(name: String, description: String, amount: String) {
@@ -156,10 +163,14 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun SetUpRecyclerLayoutGrid() {
+        mAdapterGrid = GroceryGridAdapter(mPresenter)
+        rvGroceries.adapter = mAdapterGrid
         rvGroceries.layoutManager = GridLayoutManager(this,2)
     }
 
     override fun SetUpRecyclerLayoutHorizontal() {
+        mAdapter = GroceryAdapter(mPresenter)
+        rvGroceries.adapter = mAdapter
         rvGroceries.layoutManager =
             LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
     }

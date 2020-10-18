@@ -40,26 +40,45 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
     }
 
     override fun onUiReady(owner: LifecycleOwner) {
+        val layoutvalue = mGroceryModel.getRecyclerViewLayoutValue()
+        if(layoutvalue == "0"){
+            mView.SetUpRecyclerLayoutGrid()
+            mGroceryModel.getGroceries(
+                onSuccess = {
+                    mView.showGroceryDataGrid(it)
+                },onFaiure = {
+
+                }
+            )
+        }else{
+            mView.SetUpRecyclerLayoutHorizontal()
+            mGroceryModel.getGroceries(
+                onSuccess = {
+                    mView.showGroceryData(it)
+                },onFaiure = {
+
+                }
+            )
+        }
         val name =mAuthenticatioModel.getUserName()
       //  Log.d("UserName ", name)
         mView.showUserName(name)
-        mGroceryModel.getGroceries(
-            onSuccess = {
-                mView.showGroceryData(it)
 
-            },
-            onFaiure = {
-                mView.showErrorMessage(it)
-            }
-        )
+
+
+
+//        mGroceryModel.getGroceries(
+//            onSuccess = {
+//                mView.showGroceryData(it)
+//
+//            },
+//            onFaiure = {
+//                mView.showErrorMessage(it)
+//            }
+//        )
         mView.displayToolbaeTitle(mGroceryModel.getAppNameFromRemoteComfig())
 
-       val layoutvalue = mGroceryModel.getRecyclerViewLayoutValue()
-        if(layoutvalue == "0"){
-            mView.SetUpRecyclerLayoutGrid()
-        }else{
-            mView.SetUpRecyclerLayoutHorizontal()
-        }
+
     }
 
 
