@@ -1,7 +1,6 @@
 package com.padc.grocery.mvp.presenters.impls
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.padc.grocery.data.models.GroceryModelImpl
 import com.padc.grocery.data.vos.GroceryVO
@@ -41,25 +40,8 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
     override fun onUiReady(owner: LifecycleOwner) {
         val layoutvalue = mGroceryModel.getRecyclerViewLayoutValue()
-        if(layoutvalue == "0"){
-            mView.SetUpRecyclerLayoutGrid()
-            mGroceryModel.getGroceries(
-                onSuccess = {
-                    mView.showGroceryDataGrid(it)
-                },onFaiure = {
+        mView.showViewType(layoutvalue)
 
-                }
-            )
-        }else{
-            mView.SetUpRecyclerLayoutHorizontal()
-            mGroceryModel.getGroceries(
-                onSuccess = {
-                    mView.showGroceryData(it)
-                },onFaiure = {
-
-                }
-            )
-        }
         val name =mAuthenticatioModel.getUserName()
       //  Log.d("UserName ", name)
         mView.showUserName(name)
@@ -67,15 +49,16 @@ class MainPresenterImpl : MainPresenter, AbstractBasePresenter<MainView>() {
 
 
 
-//        mGroceryModel.getGroceries(
-//            onSuccess = {
-//                mView.showGroceryData(it)
-//
-//            },
-//            onFaiure = {
-//                mView.showErrorMessage(it)
-//            }
-//        )
+        mGroceryModel.getGroceries(
+            onSuccess = {
+                mView.showGroceryData(it)
+
+
+            },
+            onFaiure = {
+                mView.showErrorMessage(it)
+            }
+        )
         mView.displayToolbaeTitle(mGroceryModel.getAppNameFromRemoteComfig())
 
 

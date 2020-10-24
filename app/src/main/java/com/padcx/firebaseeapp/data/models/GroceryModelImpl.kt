@@ -44,15 +44,8 @@ object GroceryModelImpl : GroceryModel {
         return mFirebaseRemoteConfigManager.getToolbarName()
     }
 
-    override fun setRemoteConfigValueForRecyclerView() {
-        mFirebaseRemoteConfigManager.setUpRecyclerLayoutValue()
-    }
 
-    override fun fetchRemoteConfigForRecyclerView() {
-        mFirebaseRemoteConfigManager.fetchRemoteConfigForRecyclerValue()
-    }
-
-    override fun getRecyclerViewLayoutValue(): String {
+    override fun getRecyclerViewLayoutValue(): Int {
         return  mFirebaseRemoteConfigManager.getRecyclerViewLayout()
     }
 

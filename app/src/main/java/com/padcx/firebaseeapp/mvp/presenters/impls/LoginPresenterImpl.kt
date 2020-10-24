@@ -18,8 +18,8 @@ class LoginPresenterImpl : LoginPresenter, AbstractBasePresenter<LoginView>() {
     override fun onUiReady(owner: LifecycleOwner) {
        mGroceryModel.setRemoteConfigWithDefaultValues()
         mGroceryModel.fetchRemoteConfig()
-        mGroceryModel.setRemoteConfigValueForRecyclerView()
-        mGroceryModel.fetchRemoteConfigForRecyclerView()
+//        mGroceryModel.setRemoteConfigValueForRecyclerView()
+//        mGroceryModel.fetchRemoteConfigForRecyclerView()
     }
 
     override fun onTapLogin(email: String, password: String) {

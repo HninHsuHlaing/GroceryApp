@@ -26,9 +26,7 @@ interface GroceryModel {
     fun getAppNameFromRemoteComfig() : String
 
 
-    fun setRemoteConfigValueForRecyclerView()
 
-    fun fetchRemoteConfigForRecyclerView()
 
-    fun getRecyclerViewLayoutValue() :String
+    fun getRecyclerViewLayoutValue() :Int
 }

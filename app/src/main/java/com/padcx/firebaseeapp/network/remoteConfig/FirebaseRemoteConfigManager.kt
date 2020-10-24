@@ -24,16 +24,13 @@ object FirebaseRemoteConfigManager {
     }
     fun setUpRemoteConfigWithDefaultValues(){
         val defaultValue : Map<String,String> = hashMapOf(
-            "mainScreenAppBarTitle" to "Grocery-app"
+            "mainScreenAppBarTitle" to "Grocery-app",
+            "recyclerLayout" to "1"
         )
         remoteConfig.setDefaultsAsync(defaultValue)
 
     }
-    fun setUpRecyclerLayoutValue(){
-        val recyclerValue :Map<String,Int> = hashMapOf(
-            "recyclerLayout" to 1
-        )
-    }
+
     fun fetchRemoteConfigs(){
         remoteConfig.fetch()
             .addOnCompleteListener { task ->
@@ -48,27 +45,14 @@ object FirebaseRemoteConfigManager {
             }
     }
 
-    fun fetchRemoteConfigForRecyclerValue(){
-        remoteConfig.fetch()
-            .addOnCompleteListener {task ->
-                if (task.isSuccessful){
-                    Log.d("Firebase","Firebase Remote Config fetch Success")
-                    remoteConfig.activate().addOnCompleteListener {
-                        Log.d("Firebase","Firebase Remote Config Activated")
-                    }
-                }else{
-                    Log.d("Firebasee ", "Firebase Remote Config fetch Failed")
-                }
-            }
-    }
-
-
     fun getToolbarName(): String{
 
         return  remoteConfig.getValue("mainScreenAppBarTitle").asString()
     }
 
-    fun getRecyclerViewLayout() :String{
-        return  remoteConfig.getValue("recyclerLayout").asString()
+    fun getRecyclerViewLayout() :Int{
+        val intvalue = remoteConfig.getValue("recyclerLayout").asString()
+        val recyclervalue =intvalue.toInt()
+        return  recyclervalue
     }
 }
